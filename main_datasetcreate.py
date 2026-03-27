@@ -22,13 +22,18 @@ def make_testdata(camsds, ds_eagrid, cams_pix=5, sector="All_sources", source="N
     # -----------------------------
     # Create Array for the cutting loop
     # -----------------------------
-    min_lon = processor.eagrid_lon_src.min()
-    max_lon = processor.eagrid_lon_src.max()
-    min_lat = processor.eagrid_lat_src.min()
-    max_lat = processor.eagrid_lat_src.max()
+    # min_lon = processor.eagrid_lon_src.min()
+    # max_lon = processor.eagrid_lon_src.max()
+    # min_lat = processor.eagrid_lat_src.min()
+    # max_lat = processor.eagrid_lat_src.max()
 
     # southern boundary of Hokkaido
     # min_lat = 41.35
+
+    min_lon = 130.
+    max_lon = 150.
+    min_lat = 25.
+    max_lat =  46.
 
     lon_array = np.arange(min_lon, max_lon, 0.1)
     lat_array = np.arange(min_lat, max_lat, 0.1)
@@ -70,6 +75,7 @@ def make_testdata(camsds, ds_eagrid, cams_pix=5, sector="All_sources", source="N
     eagrid_dataset = np.array(eagrid_dataset)
 
 
+    print(f"center_lon : {center_lon}")
     # ---------------------------------
     # Save dataset
     # ---------------------------------
@@ -80,6 +86,7 @@ def make_testdata(camsds, ds_eagrid, cams_pix=5, sector="All_sources", source="N
     np.save("created_data/cams_conserv_test.npy", cams_conserv_dataset)
     np.save("created_data/eagrid_dataset_test.npy", eagrid_dataset)
 
+    
 
 # ====================================================
 # helper function
@@ -106,8 +113,8 @@ def gridcell_area(lat, dlon, dlat):
 
 if __name__ == "__main__":
 
-    #ds_eagrid = xr.open_dataset("Emission_grid_all.nc")
-    ds_eagrid = xr.open_dataset('/home/yuna/data_create/Emission_grid_all.nc')
+    ds_eagrid = xr.open_dataset("Emission_grid_all.nc")
+    #ds_eagrid = xr.open_dataset('/home/yuna/data_create/Emission_grid_all.nc')
     cams_path = "CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_nox_v6.2_yearly_2010.nc"
     camsds = xr.open_dataset(cams_path)
 

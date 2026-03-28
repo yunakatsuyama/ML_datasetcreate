@@ -80,11 +80,11 @@ def make_testdata(camsds, ds_eagrid, cams_pix=5, sector="All_sources", source="N
     # Save dataset
     # ---------------------------------
 
-    np.save("created_data/center_lon_test.npy", center_lon)
-    np.save("created_data/center_lat_test.npy", center_lat)
-    np.save("created_data/cams_bili_test.npy", cams_bili_dataset)
-    np.save("created_data/cams_conserv_test.npy", cams_conserv_dataset)
-    np.save("created_data/eagrid_dataset_test.npy", eagrid_dataset)
+    # np.save("created_data/center_lon_test.npy", center_lon)
+    # np.save("created_data/center_lat_test.npy", center_lat)
+    # np.save("created_data/cams_bili_test.npy", cams_bili_dataset)
+    # np.save("created_data/cams_conserv_test.npy", cams_conserv_dataset)
+    # np.save("created_data/eagrid_dataset_test.npy", eagrid_dataset)
 
     
 

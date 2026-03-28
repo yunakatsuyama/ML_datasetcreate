@@ -54,11 +54,11 @@ class GlobalEmissionProcessor:
     def build_target_grid(self):
 
         # CAMS resolution
-        dlon = abs(self.cams_lon[1] - self.cams_lon[0])
-        dlat = abs(self.cams_lat[1] - self.cams_lat[0])
+        self.dlon = abs(self.cams_lon[1] - self.cams_lon[0])
+        self.dlat = abs(self.cams_lat[1] - self.cams_lat[0])
 
-        fine_dlon = round(dlon / self.k, 5)
-        fine_dlat = round(dlat / self.k, 5)
+        fine_dlon = round(self.dlon / self.k, 5)
+        fine_dlat = round(self.dlat / self.k, 5)
 
         print(fine_dlon)
         print(fine_dlat)
@@ -83,11 +83,11 @@ class GlobalEmissionProcessor:
         # --------------------------------
         # Expand to CAMS grid edges
         # --------------------------------
-        lon_min = self.cams_lon[ix_min] - dlon/2
-        lon_max = self.cams_lon[ix_max] + dlon/2
+        lon_min = self.cams_lon[ix_min] - self.dlon/2
+        lon_max = self.cams_lon[ix_max] + self.dlon/2
 
-        lat_min = self.cams_lat[iy_min] - dlat/2
-        lat_max = self.cams_lat[iy_max] + dlat/2
+        lat_min = self.cams_lat[iy_min] - self.dlat/2
+        lat_max = self.cams_lat[iy_max] + self.dlat/2
 
         
         # --------------------------------
@@ -139,7 +139,7 @@ class GlobalEmissionProcessor:
 
         self.eagrid_lat_src = lat_unique
         self.eagrid_lon_src = lon_unique
-        self.eagrid_emission = np.nan_to_num(grid)
+        self.eagrid_emission = np.nan_to_num(grid, nan = 0.0)
 
 
     # --------------------------------------------------
@@ -157,6 +157,7 @@ class GlobalEmissionProcessor:
     # --------------------------------------------------
     def regrid_all(self):
 
+        # target center　
         grid_out = {
             "lon": self.eagrid_lon,
             "lat": self.eagrid_lat,
@@ -233,6 +234,7 @@ class GlobalEmissionProcessor:
     
         print("before:", before)
         print("after :", after)
+
     
         print("relative error:", abs(after-before)/before)
     # ------helper function of check conservation--------
